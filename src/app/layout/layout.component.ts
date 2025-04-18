@@ -12,7 +12,31 @@ import { FooterComponent } from '../footer/footer.component';
 })
 export class LayoutComponent {
   navItems = [
-    { icon: 'fas fa-fw fa-tachometer-alt', label: 'Dashboard', link: '/', active: true },
-    // Add more nav items as needed, e.g., { icon: 'fas fa-table', label: 'Tables', link: '/tables' }
+    {
+      icon: 'fas fa-fw fa-tachometer-alt',
+      label: 'Dashboard',
+      link: '/dashboard'
+    },
+    {
+      icon: 'fas fa-fw fa-suitcase',
+      label: 'Cash Flow',
+      subItems: [
+        { label: 'Income', link: '/pages/incomes' },
+        { label: 'Expense', link: '/pages/expenses' },
+        { label: 'Income Category', link: '/pages/income_categories' },
+        { label: 'Expense Category', link: '/pages/expense_categories' }
+      ],
+      collapsed: false // Show by default
+    },
+    {
+      icon: 'fas fa-fw fa-cog',
+      label: 'Settings',
+      subItems: [
+        { label: 'User', link: '/pages/users' },
+        { label: 'Role', link: '/pages/roles' },
+        { label: 'Permission', link: '/pages/permissions' }
+      ],
+      collapsed: false // Show by default
+    }
   ];
 }
