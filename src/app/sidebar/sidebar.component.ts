@@ -54,6 +54,12 @@ export class SidebarComponent implements OnInit {
   }
 
   toggleCollapse(item: any) {
+    this.navItems.forEach(navItem => {
+      if (navItem !== item) {
+        navItem.collapsed = true;
+      }
+    });
+
     item.collapsed = !item.collapsed;
   }
 }

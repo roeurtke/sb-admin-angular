@@ -16,7 +16,7 @@
     @if (item.link) {
       <!-- Single Nav Item (e.g., Dashboard) -->
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="item.link">
+        <a class="nav-link" [routerLink]="item.link" (click)="toggleCollapse(item)">
           <i [class]="item.icon"></i>
           <span>{{ item.label }}</span>
         </a>
