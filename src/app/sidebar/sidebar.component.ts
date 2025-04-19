@@ -62,4 +62,12 @@ export class SidebarComponent implements OnInit {
 
     item.collapsed = !item.collapsed;
   }
+
+  toggleSidebar(): void {
+    const body = document.body;
+    const sidebar = document.querySelector('.sidebar');
+    
+    body.classList.toggle('sidebar-toggled');
+    sidebar?.classList.toggle('toggled');
+  }
 }
