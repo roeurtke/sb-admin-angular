@@ -1,5 +1,4 @@
-// src/app/sidebar/sidebar.component.ts
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 
 @Component({
@@ -10,13 +9,7 @@ import { RouterLink, RouterLinkActive, Router } from '@angular/router';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-  @Input() navItems: {
-    icon: string;
-    label: string;
-    link?: string;
-    subItems?: { label: string; link: string }[];
-    collapsed?: boolean;
-  }[] = [
+  navItems = [
     {
       icon: 'fas fa-fw fa-tachometer-alt',
       label: 'Dashboard',
