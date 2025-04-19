@@ -1,5 +1,5 @@
 // src/app/sidebar/sidebar.component.ts
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 
 @Component({
@@ -9,7 +9,7 @@ import { RouterLink, RouterLinkActive, Router } from '@angular/router';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
   @Input() navItems: {
     icon: string;
     label: string;
@@ -35,7 +35,7 @@ export class SidebarComponent {
     },
     {
       icon: 'fas fa-fw fa-cog',
-      label: 'Settings',
+      label: 'Setting',
       subItems: [
         { label: 'User', link: '/pages/users' },
         { label: 'Role', link: '/pages/roles' },
@@ -45,7 +45,9 @@ export class SidebarComponent {
     }
   ];
 
-  constructor(private router: Router) {
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
     this.setInitialCollapseState();
   }
 
