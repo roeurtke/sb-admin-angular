@@ -24,3 +24,7 @@ body.sidebar-toggled .navbar-nav.sidebar .nav-item .nav-link span {
 body.sidebar-toggled .navbar-nav.sidebar .nav-item .collapse {
   display: none;
 }
+
+.sidebar-dark #sidebarToggle {
+  margin-top: 16px;
+}
