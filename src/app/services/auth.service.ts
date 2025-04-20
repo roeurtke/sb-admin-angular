@@ -1,8 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, map, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
+
+interface LoginResponse {
+  token: string;
+  permissions?: string[];
+  user?: any;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -10,71 +16,74 @@ import { environment } from '../../environments/environment';
 export class AuthService {
   private readonly apiUrl = `${environment.apiUrl}/api/login/`;
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
+  private userPermissionsSubject = new BehaviorSubject<string[]>([]);
   
-  // Public observable for authentication state
+  // Public observables
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
+  userPermissions$ = this.userPermissionsSubject.asObservable();
 
   constructor(
     private http: HttpClient,
     private router: Router
   ) {
-    // Initialize authentication state from storage
     this.checkInitialAuthState();
   }
 
-  /**
-   * Login user with credentials
-   * @param username 
-   * @param password 
-   * @returns Observable with login response
-   */
-  login(username: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}`, { username, password }).pipe(
-      tap((response: any) => {
-        // Store token and update state
-        this.storeAuthData(response.token);
+  login(username: string, password: string): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(this.apiUrl, { username, password }).pipe(
+      tap(response => {
+        this.storeAuthData(response.token, response.permissions || []);
         this.isAuthenticatedSubject.next(true);
+        this.userPermissionsSubject.next(response.permissions || []);
         this.router.navigate(['/dashboard']);
       })
     );
   }
 
-  /**
-   * Logout current user
-   */
   logout(): void {
     this.clearAuthData();
     this.isAuthenticatedSubject.next(false);
+    this.userPermissionsSubject.next([]);
     this.router.navigate(['/login']);
   }
 
-  /**
-   * Check if user is authenticated
-   */
+  // Synchronous check
   get isAuthenticated(): boolean {
     return this.isAuthenticatedSubject.value;
   }
 
-  // Private helper methods
-
-  private checkInitialAuthState(): void {
-    const token = localStorage.getItem('auth_token');
-    this.isAuthenticatedSubject.next(!!token);
+  // Permission check methods
+  hasPermission(permission: string): boolean {
+    return this.userPermissionsSubject.value.includes(permission);
   }
 
-  private storeAuthData(token: string): void {
+  checkPermissions(requiredPermissions: string[]): Observable<boolean> {
+    return this.userPermissions$.pipe(
+      map(userPermissions => {
+        if (requiredPermissions.length === 0) return true;
+        return requiredPermissions.every(perm => userPermissions.includes(perm));
+      })
+    );
+  }
+
+  // Private methods
+  private checkInitialAuthState(): void {
+    const token = localStorage.getItem('auth_token');
+    const permissions = JSON.parse(localStorage.getItem('auth_permissions') || '[]');
+    this.isAuthenticatedSubject.next(!!token);
+    this.userPermissionsSubject.next(permissions);
+  }
+
+  private storeAuthData(token: string, permissions: string[]): void {
     localStorage.setItem('auth_token', token);
-    // Add other user data to storage if needed
+    localStorage.setItem('auth_permissions', JSON.stringify(permissions));
   }
 
   private clearAuthData(): void {
     localStorage.removeItem('auth_token');
-    // Clear other user data if stored
+    localStorage.removeItem('auth_permissions');
   }
 
-  /**
-   * Get auth token from storage
-   */
   getToken(): string | null {
     return localStorage.getItem('auth_token');
   }
