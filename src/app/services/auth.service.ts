@@ -49,7 +49,7 @@ export class AuthService {
 
   // Synchronous check
   get isAuthenticated(): boolean {
-    return this.isAuthenticatedSubject.value;
+    return this.isAuthenticatedSubject.value && !!this.getToken();
   }
 
   // Permission check methods
