@@ -8,21 +8,23 @@ import { ExpenseCategoriesComponent } from './pages/expense-categories/expense-c
 import { UsersComponent } from './pages/users/users.component';
 import { RolesComponent } from './pages/roles/roles.component';
 import { PermissionsComponent } from './pages/permissions/permissions.component';
+import { LoginComponent } from './pages/login/login.component';
 
 export const routes: Routes = [
-    {
-        path: '',
-        component: LayoutComponent,
-        children: [
-          { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-          { path: 'dashboard', component: DashboardComponent },
-          { path: 'pages/incomes', component: IncomesComponent },
-          { path: 'pages/expenses', component: ExpensesComponent },
-          { path: 'pages/income_categories', component: IncomeCategoriesComponent },
-          { path: 'pages/expense_categories', component: ExpenseCategoriesComponent },
-          { path: 'pages/users', component: UsersComponent },
-          { path: 'pages/roles', component: RolesComponent },
-          { path: 'pages/permissions', component: PermissionsComponent }
-        ]
-      }
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  {
+      path: '',
+      component: LayoutComponent,
+      children: [
+        { path: 'dashboard', component: DashboardComponent },
+        { path: 'pages/incomes', component: IncomesComponent },
+        { path: 'pages/expenses', component: ExpensesComponent },
+        { path: 'pages/income_categories', component: IncomeCategoriesComponent },
+        { path: 'pages/expense_categories', component: ExpenseCategoriesComponent },
+        { path: 'pages/users', component: UsersComponent },
+        { path: 'pages/roles', component: RolesComponent },
+        { path: 'pages/permissions', component: PermissionsComponent }
+      ]
+  },
 ];
