@@ -1,29 +1,3 @@
-body.sidebar-toggled .navbar-nav.sidebar {
-  width: 6.5rem !important;
-  overflow: hidden;
-  transition: width 0.3s ease;
-}
-
-body.sidebar-toggled .navbar-nav.sidebar .sidebar-brand-text,
-body.sidebar-toggled .navbar-nav.sidebar .collapse-item,
-body.sidebar-toggled .navbar-nav.sidebar .sidebar-heading {
-  display: none;
-}
-
-body.sidebar-toggled .navbar-nav.sidebar .nav-item .nav-link {
-  text-align: center;
-  padding: 0.75rem 0.5rem;
-  width: 6.5rem;
-}
-
-body.sidebar-toggled .navbar-nav.sidebar .nav-item .nav-link span {
-  display: none;
-}
-
-body.sidebar-toggled .navbar-nav.sidebar .nav-item .collapse {
-  display: none;
-}
-
 .sidebar-dark #sidebarToggle {
   margin-top: 16px;
 }
