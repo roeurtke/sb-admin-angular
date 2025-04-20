@@ -30,7 +30,7 @@ export class AuthService {
    * @returns Observable with login response
    */
   login(username: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, { username, password }).pipe(
+    return this.http.post(`${this.apiUrl}`, { username, password }).pipe(
       tap((response: any) => {
         // Store token and update state
         this.storeAuthData(response.token);
