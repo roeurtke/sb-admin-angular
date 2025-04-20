@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
 import { LayoutComponent }  from './layout/layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { IncomesComponent } from './pages/incomes/incomes.component';
@@ -8,11 +10,11 @@ import { ExpenseCategoriesComponent } from './pages/expense-categories/expense-c
 import { UsersComponent } from './pages/users/users.component';
 import { RolesComponent } from './pages/roles/roles.component';
 import { PermissionsComponent } from './pages/permissions/permissions.component';
-import { LoginComponent } from './pages/login/login.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   {
       path: '',
       component: LayoutComponent,

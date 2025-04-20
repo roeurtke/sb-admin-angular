@@ -32,6 +32,7 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/assets/sb-admin-2/css/sb-admin-2.min.css",
+              "src/assets/sb-admin-2/fonts/css.css",
               "src/styles.css"
             ],
             "scripts": [
