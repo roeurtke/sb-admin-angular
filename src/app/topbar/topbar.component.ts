@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 import { SidebarToggleDirective } from '../shared/directives/sidebar-toggle.directive';
 
 @Component({
@@ -9,4 +11,15 @@ import { SidebarToggleDirective } from '../shared/directives/sidebar-toggle.dire
 })
 export class TopbarComponent {
   @Input() userName: string = 'User Name';
+
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
+  logout() {
+    if (confirm('Are you sure you want to logout?')) {
+      this.authService.logout();
+    }
+  }
 }
