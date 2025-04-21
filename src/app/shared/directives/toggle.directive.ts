@@ -1,15 +1,15 @@
 import { Directive, ElementRef, HostListener } from '@angular/core';
 
 @Directive({
-  selector: '[appSidebarToggle]'
+  selector: '[appToggle]'
 })
-export class SidebarToggleDirective {
+export class ToggleDirective {
 
   constructor(private el: ElementRef) {}
 
   @HostListener('click')
-  toggleSidebar() {
-    const sidebar = document.querySelector('#accordionSidebar');
+  onToggleClick() {
+    const sidebar = document.querySelector('#toggleTopbar');
     sidebar?.classList.toggle('toggled');
   }
 
