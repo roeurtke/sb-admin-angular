@@ -1,11 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import { ToggleDirective } from '../shared/directives/toggle.directive';
 
 @Component({
   selector: 'app-topbar',
-  imports: [ToggleDirective],
+  imports: [],
   templateUrl: './topbar.component.html',
   styleUrl: './topbar.component.css'
 })

@@ -9,7 +9,7 @@ export class ToggleDirective {
 
   @HostListener('click')
   onToggleClick() {
-    const sidebar = document.querySelector('#toggleTopbar');
+    const sidebar = this.el.nativeElement;
     sidebar?.classList.toggle('toggled');
   }
 
